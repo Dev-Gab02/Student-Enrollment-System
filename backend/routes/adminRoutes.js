@@ -6,5 +6,5 @@ import adminController from '../controllers/adminController.js';
 
 router.get("/enrollments", authMiddleware, roleMiddleware("admin"), adminController.getAllEnrollments);
 router.patch("/enrollment/:id", authMiddleware, roleMiddleware("admin"), adminController.updateEnrollmentStatus);
-
+router.delete("/enrollment/:id", authMiddleware, roleMiddleware("admin"), adminController.deleteEnrollment);
 export default router;

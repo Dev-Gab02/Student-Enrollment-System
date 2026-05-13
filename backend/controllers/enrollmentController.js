@@ -69,6 +69,52 @@ const enrollmentController = {
     } catch (error) {
       res.status(500).json(error);
     }
+  },
+
+  async getEnrollmentById(req, res) {
+    try {
+
+      const student_id =
+      req.user.student_id;
+
+      const result =
+      await sql.query`
+
+        SELECT
+          student_id,
+          full_name,
+          email,
+          course,
+          year_level,
+          created_at
+
+        FROM users
+
+        WHERE student_id =
+        ${student_id}
+      `;
+
+      if (
+        result.recordset.length === 0
+      ) {
+        return res.status(404).json({
+          message:
+          "Student not found"
+        });
+      }
+
+      res.json(
+        result.recordset[0]
+      );
+
+    } catch (error) {
+
+      res.status(500).json({
+        message:
+        "Failed to get student profile",
+        error
+      });
+    }
   }
 }
 

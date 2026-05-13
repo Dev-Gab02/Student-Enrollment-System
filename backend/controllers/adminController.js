@@ -66,6 +66,39 @@ const adminController = {
     } catch (error) {
       res.status(500).json(error);
     }
+  },
+
+  async deleteEnrollment(req, res) {
+
+    try {
+
+      const { id } =
+      req.params;
+
+      const result =
+      await sql.query`
+
+        DELETE
+        FROM enrollments
+
+        WHERE enrollment_id =
+        ${id}
+      `;
+
+      res.json({
+        message:
+        "Enrollment deleted successfully"
+      });
+
+    } catch (error) {
+
+      res.status(500).json({
+        message:
+        "Failed to delete enrollment",
+        error
+      });
+
+    }
   }
 }
 
