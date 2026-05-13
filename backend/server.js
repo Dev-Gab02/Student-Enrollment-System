@@ -4,6 +4,8 @@ import dotenv from 'dotenv';
 import helmet from 'helmet';
 import { connectDB } from './config/db.js'
 import authRoutes from './routes/authRoutes.js'
+import enrollmentRoutes from './routes/enrollmentRoutes.js'
+import adminRoutes from './routes/adminRoutes.js'
 
 dotenv.config();
 
@@ -16,10 +18,8 @@ app.use(express.json());
 app.use(helmet());
 
 app.use("/api/auth", authRoutes);
-
-app.get("/", (req, res) => {
-  res.send("Enrollment API Running...");
-});
+app.use("/api/enrollment", enrollmentRoutes);
+app.use("/api/admin", adminRoutes);
 
 const PORT = process.env.PORT || 5000;
 
